@@ -45,75 +45,75 @@ app.get("/", (req, res) => {
   res.send("this is express");
 });
 
-// app.get("/users", (req, res) => {
-//   let qparam = req.query.username;
-//   console.log(qparam);
-//   tempUsers = users;
-//   if (qparam) {
-//     tempUsers = tempUsers.filter((val) => {
-//       return val.username == qparam;
-//     });
-//   }
-
-//   res.status(200).json({
-//     message: "user fetched",
-//     result: tempUsers,
-//   });
-// });
-
-//prodcuts
-// app.get("/products", (req, res) => {
-//   let qparam = req.query.productname;
-//   console.log(qparam);
-//   tempProducts = products;
-//   if (qparam) {
-//     tempProducts = tempProducts.filter((val) => {
-//       return val.product_name == qparam;
-//     });
-//   }
-//   res.status(200).json({
-//     message: "products fetched",
-//     result: tempProducts,
-//   });
-// });
-
-//route params + query params
-//bisa get user dan products
-app.get("/:route", (req, res) => {
-  let paramsRoute = req.params.route;
-  let qparam = req.query;
-  console.log("route adalah " + paramsRoute);
+app.get("/users", (req, res) => {
+  let qparam = req.query.username;
   console.log(qparam);
-  let temp;
-  let msg = "";
-
-  if (paramsRoute == "products") {
-    temp = products;
-
-    if (qparam.productname) {
-      temp = temp.filter((val) => {
-        return (
-          val.product_name.toLowerCase() == qparam.productname.toLowerCase()
-        );
-      });
-    }
-    msg = "fetched products";
-  } else if (paramsRoute == "users") {
-    temp = users;
-
-    if (qparam.username) {
-      temp = temp.filter((val) => {
-        return val.username.toLowerCase() == qparam.username.toLowerCase();
-      });
-    }
-    msg = "fetched users";
+  tempUsers = users;
+  if (qparam) {
+    tempUsers = tempUsers.filter((val) => {
+      return val.username == qparam;
+    });
   }
 
   res.status(200).json({
-    message: msg,
-    result: temp,
+    message: "user fetched",
+    result: tempUsers,
   });
 });
+
+// prodcuts;
+app.get("/products", (req, res) => {
+  let qparam = req.query.productname;
+  console.log(qparam);
+  tempProducts = products;
+  if (qparam) {
+    tempProducts = tempProducts.filter((val) => {
+      return val.product_name == qparam;
+    });
+  }
+  res.status(200).json({
+    message: "products fetched",
+    result: tempProducts,
+  });
+});
+
+//route params + query params
+//bisa get user dan products
+// app.get("/:route", (req, res) => {
+//   let paramsRoute = req.params.route;
+//   let qparam = req.query;
+//   console.log("route adalah " + paramsRoute);
+//   console.log(qparam);
+//   let temp;
+//   let msg = "";
+
+//   if (paramsRoute == "products") {
+//     temp = products;
+
+//     if (qparam.productname) {
+//       temp = temp.filter((val) => {
+//         return (
+//           val.product_name.toLowerCase() == qparam.productname.toLowerCase()
+//         );
+//       });
+//     }
+//     msg = "fetched products";
+//   } else if (paramsRoute == "users") {
+//     temp = users;
+
+//     if (qparam.username) {
+//       temp = temp.filter((val) => {
+//         return val.username.toLowerCase() == qparam.username.toLowerCase();
+//       });
+//     }
+//     msg = "fetched users";
+//   }
+
+//   res.status(200).json({
+//     message: msg,
+//     result: temp,
+//   });
+// });
 
 app.post("/users", (req, res) => {
   const data = req.body;
